@@ -15,18 +15,18 @@ class LibandroidPty < Formula
     gcc = ENV["HOMEBREW_CC"] || %x[which gcc].chomp
     strip = %x[which strip].chomp
 
-    system "make", "GCC=#{gcc}", "STRIP=#{strip}"
+    system "make", "GCC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_PTY_SO=#{name}.so"
     system "make", "install", "INSTALL_DIR=#{prefix}/lib"
 
     system "sleep", "1"
 
     Pathname.new("#{HOMEBREW_PREFIX}/lib/preload").mkpath
-    preloadlib = "#{HOMEBREW_PREFIX}/lib/preload/libandroid-pty-%08x.so" % [Time.now.to_i]
+    preloadlib = "#{HOMEBREW_PREFIX}/lib/preload/#{name}-%08x.so" % [Time.now.to_i]
 
-    ohai "Set envionment variable LD_PRELOAD to use libandroid-pty.so:"
+    ohai "Set envionment variable LD_PRELOAD to use #{name}.so:"
     ohai "  LD_PRELOAD='... #{preloadlib}'"
 
-    system "install", "-m", "0700", "#{prefix}/lib/libandroid-pty.so", preloadlib
+    system "install", "-m", "0700", "#{prefix}/lib/#{name}.so", preloadlib
   end
 
   test do
