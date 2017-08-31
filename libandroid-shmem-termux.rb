@@ -5,7 +5,9 @@ class LibandroidShmemTermux < Formula
   version "0.2"
   sha256 "75e687f48c01d96ea1345f11c064ff76f7eb9a119f51ebe2f6253cf8b24a2b97"
 
-  keg_only "dynamic library `libandroid-pty.so' is preloaded by other program." 
+  head do
+    url "https://github.com/termux/libandroid-shmem.git"
+  end
 
   patch do
     url "https://gist.githubusercontent.com/z80oolong/247dbbb0a7d83a1dea98de2939327432/raw/da08c875c5dba1d5fd42745031998aa54624fa24/libandroid-shmem-termux-0.2-fix.diff"
@@ -13,7 +15,7 @@ class LibandroidShmemTermux < Formula
   end
 
   def install
-    gcc = ENV["HOMEBREW_CC"] || %x[which gcc].chomp
+    gcc = ENV.cc || %x[which gcc].chomp
     strip = %x[which strip].chomp
 
     system "make", "CC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_SHMEM_SO=#{name}.so"
@@ -21,16 +23,12 @@ class LibandroidShmemTermux < Formula
 
     system "sleep", "1"
 
-    Pathname.new("#{HOMEBREW_PREFIX}/lib/preload").mkpath
-    preloadlib = "#{HOMEBREW_PREFIX}/lib/preload/#{name}-%08x.so" % [Time.now.to_i]
+    preloadlib = Pathname.new("#{HOMEBREW_PREFIX}/lib/preload"); preloadlib.mkpath
+    preload_so = "#{name}-%08x.so" % [Time.now.to_i]
 
     ohai "Set envionment variable LD_PRELOAD to use #{name}.so:"
-    ohai "  LD_PRELOAD='... #{preloadlib}'"
+    ohai "/usr/bin/env LD_PRELOAD='... #{preloadlib}/#{preload_so}'"
 
-    system "install", "-m", "0700", "#{prefix}/lib/#{name}.so", preloadlib
-  end
-
-  test do
-    system "false"
+    preloadlib.install "#{name}.so" => preload_so
   end
 end

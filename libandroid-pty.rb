@@ -1,5 +1,5 @@
 class LibandroidPty < Formula
-  desc "Preloaded-dynamic library for pty function on Debian noroot."
+  desc "Preloaded-dynamic library for pseudo terminal function on Debian noroot."
   homepage "http://qiita.com/z80oolong/items/d3585cd5542d3d60ce12"
   url "https://github.com/z80oolong/libandroid-pty/archive/v0.1.tar.gz"
   version "0.1"
@@ -9,27 +9,21 @@ class LibandroidPty < Formula
     url "https://github.com/z80oolong/libandroid-pty.git"
   end
 
-  keg_only "dynamic library `libandroid-pty.so' is preloaded by other program." 
-
   def install
-    gcc = ENV["HOMEBREW_CC"] || %x[which gcc].chomp
+    gcc = ENV.cc || %x[which gcc].chomp
     strip = %x[which strip].chomp
 
     system "make", "GCC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_PTY_SO=#{name}.so"
-    system "make", "install", "INSTALL_DIR=#{prefix}/lib"
+    system "make", "install", "INSTALL_PREFIX=#{prefix}"
 
     system "sleep", "1"
 
-    Pathname.new("#{HOMEBREW_PREFIX}/lib/preload").mkpath
-    preloadlib = "#{HOMEBREW_PREFIX}/lib/preload/#{name}-%08x.so" % [Time.now.to_i]
+    preloadlib = Pathname.new("#{HOMEBREW_PREFIX}/lib/preload"); preloadlib.mkpath
+    preload_so = "#{name}-%08x.so" % [Time.now.to_i]
 
     ohai "Set envionment variable LD_PRELOAD to use #{name}.so:"
-    ohai "  LD_PRELOAD='... #{preloadlib}'"
+    ohai "/usr/bin/env LD_PRELOAD='... #{preloadlib}/#{preload_so}'"
 
-    system "install", "-m", "0700", "#{prefix}/lib/#{name}.so", preloadlib
-  end
-
-  test do
-    system "false"
+    preloadlib.install "#{name}.so" => preload_so
   end
 end
