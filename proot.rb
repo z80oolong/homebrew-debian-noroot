@@ -26,17 +26,13 @@ class Proot < Formula
 
     system "sleep", "1"
 
-    Pathname.new("#{HOMEBREW_PREFIX}/xbin").mkpath
-    prootbin = "#{HOMEBREW_PREFIX}/xbin/#{name}-%08x" % [Time.now.to_i]
+    prootxbin = Pathname.new("#{HOMEBREW_PREFIX}/xbin"); prootxbin.mkpath
+    proot_bin = "#{name}-%08x" % [Time.now.to_i]
 
-    ohai "On Debian noroot environment, modify /proot.sh:"
-    ohai "  ..."
-    ohai "  .#{prootbin} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ..."
+    ohai "On Debian noroot environment, modify /proot.sh to use #{name}:"
+    ohai "..."
+    ohai ".#{prootxbin}/#{proot_bin} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ..."
 
-    system "install", "-m", "0700", "#{prefix}/bin/#{name}", prootbin
-  end
-
-  test do
-    system "false"
+    prootxbin.install "#{name}" => proot_bin
   end
 end
