@@ -7,6 +7,7 @@ class LibandroidShmem < Formula
   homepage "https://gist.github.com/z80oolong/247dbbb0a7d83a1dea98de2939327432"
   url "https://github.com/termux/libandroid-shmem/archive/v0.2.tar.gz"
   version "0.2"
+  revision 1
   sha256 "75e687f48c01d96ea1345f11c064ff76f7eb9a119f51ebe2f6253cf8b24a2b97"
 
   head do
@@ -23,7 +24,7 @@ class LibandroidShmem < Formula
     strip = %x[which strip].chomp
 
     system "make", "CC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_SHMEM_SO=#{name}.so"
-    system "make", "install", "PREFIX=#{prefix}"
+    system "make", "install", "PREFIX=#{prefix}", "LIBANDROID_SHMEM_SO=#{name}.so"
 
     install_preload_so
   end
