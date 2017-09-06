@@ -1,4 +1,8 @@
-class LibandroidShmemTermux < Formula
+eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload_so.rb").read
+
+class LibandroidShmem < Formula
+  include InstallPreloadSO
+
   desc "libandroid-shmem.so on Termux"
   homepage "http://zool.jpn.org/"
   url "https://github.com/termux/libandroid-shmem/archive/v0.2.tar.gz"
@@ -21,14 +25,6 @@ class LibandroidShmemTermux < Formula
     system "make", "CC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_SHMEM_SO=#{name}.so"
     system "make", "install", "PREFIX=#{prefix}"
 
-    system "sleep", "1"
-
-    preloadlib = Pathname.new("#{HOMEBREW_PREFIX}/lib/preload"); preloadlib.mkpath
-    preload_so = "#{name}-%08x.so" % [Time.now.to_i]
-
-    ohai "Set envionment variable LD_PRELOAD to use #{name}.so:"
-    ohai "/usr/bin/env LD_PRELOAD='... #{preloadlib}/#{preload_so}'"
-
-    preloadlib.install "#{name}.so" => preload_so
+    install_preload_so
   end
 end
