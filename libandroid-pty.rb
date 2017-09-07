@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload_so.rb").read
+eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload.rb").read
 
 class LibandroidPty < Formula
   include InstallPreloadSO
@@ -20,6 +20,6 @@ class LibandroidPty < Formula
     system "make", "GCC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_PTY_SO=#{name}.so"
     system "make", "install", "INSTALL_PREFIX=#{prefix}"
     
-    install_preload_so
+    preload_dir.install_preload_dir("#{name}.so")
   end
 end

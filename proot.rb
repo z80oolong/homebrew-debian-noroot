@@ -1,3 +1,5 @@
+eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload.rb").read
+
 class Proot < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
@@ -10,6 +12,13 @@ class Proot < Formula
   end
 
   depends_on "z80oolong/debian-noroot/talloc"
+
+  def preload_dir
+    @preload_dir ||= ::Pathname.new("#{HOMEBREW_PREFIX}/boot")
+    @preload_dir.mkpath unless @preload_dir.directory?
+    return @preload_dir
+  end
+  private :preload_dir
 
   def install
     f_talloc = Formula["z80oolong/debian-noroot/talloc"]
@@ -24,15 +33,16 @@ class Proot < Formula
       system "strip", "#{bin}/proot"
     end
 
-    system "sleep", "1"
+    preload_dir.install_preload_dir(bin/"#{name}")
+  end
 
-    prootxbin = Pathname.new("#{HOMEBREW_PREFIX}/xbin"); prootxbin.mkpath
-    proot_bin = "#{name}-%08x" % [Time.now.to_i]
-
-    ohai "On Debian noroot environment, modify /proot.sh to use #{name}:"
-    ohai "..."
-    ohai ".#{prootxbin}/#{proot_bin} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ..."
-
-    prootxbin.install "#{name}" => proot_bin
+  def caveats; <<-EOS.undent
+    To use #{name}, modify bootstrap script file /proot.sh on Debian noroot environment:
+    
+    for example:
+    ...
+    .#{preload_dir.current_file("#{name}")} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ...
+    ...
+    EOS
   end
 end

@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload_so.rb").read
+eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload.rb").read
 
 class LibandroidShmem < Formula
   include InstallPreloadSO
@@ -26,6 +26,6 @@ class LibandroidShmem < Formula
     system "make", "CC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_SHMEM_SO=#{name}.so"
     system "make", "install", "PREFIX=#{prefix}", "LIBANDROID_SHMEM_SO=#{name}.so"
 
-    install_preload_so
+    Pathname.preload_dir.install_preload_dir("#{name}.so")
   end
 end
