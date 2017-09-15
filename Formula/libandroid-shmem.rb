@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload.rb").read
+eval (Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb").read
 
 class LibandroidShmem < Formula
   include InstallPreloadSO

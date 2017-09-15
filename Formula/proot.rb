@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").formula_dir/"lib/install_preload.rb").read
+eval (Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb").read
 
 class Proot < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
