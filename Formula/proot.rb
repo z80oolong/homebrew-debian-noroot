@@ -13,6 +13,8 @@ class Proot < Formula
 
   depends_on "z80oolong/debian-noroot/talloc"
 
+  conflicts_with "z80oolong/ext/proot", :because => "`z80oolong/ext/proot` is installed for non-Debian noroot environment."
+
   def preload_dir
     @preload_dir ||= ::Pathname.new("#{HOMEBREW_PREFIX}/preload")
     @preload_dir.mkpath unless @preload_dir.directory?
