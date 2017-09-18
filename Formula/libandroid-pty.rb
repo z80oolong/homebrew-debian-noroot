@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb").read
+require Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb"
 
 class LibandroidPty < Formula
   include InstallPreloadSO

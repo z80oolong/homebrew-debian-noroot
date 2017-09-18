@@ -30,7 +30,7 @@ class ::Pathname
 end
 
 module InstallPreloadSO
-  def preload_dir(path = "#{HOMEBREW_PREFIX}/boot")
+  def preload_dir(path = "#{HOMEBREW_PREFIX}/preload")
     @preload_dir ||= ::Pathname.new(path)
     @preload_dir.mkpath unless @preload_dir.directory?
     return @preload_dir

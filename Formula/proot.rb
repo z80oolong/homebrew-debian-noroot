@@ -1,4 +1,4 @@
-eval (Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb").read
+require Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb"
 
 class Proot < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
@@ -14,7 +14,7 @@ class Proot < Formula
   depends_on "z80oolong/debian-noroot/talloc"
 
   def preload_dir
-    @preload_dir ||= ::Pathname.new("#{HOMEBREW_PREFIX}/boot")
+    @preload_dir ||= ::Pathname.new("#{HOMEBREW_PREFIX}/preload")
     @preload_dir.mkpath unless @preload_dir.directory?
     return @preload_dir
   end
