@@ -4,7 +4,7 @@
 
 [Linuxbrew][BREW] とは、Linux の各ディストリビューションにおけるソースコードの取得及びビルドに基づいたパッケージ管理システムです。 [Linuxbrew][BREW] の使用により、ソースコードからのビルドに基づいたソフトウェアの導入を単純かつ容易に行うことが出来ます。
 
-この [Linuxbrew][BREW] 向け Tap リポジトリは、 [pelya 氏][PELY]によって開発された [Android OS][ANDR] 上において root 権限を取ること無く、 [Debian 環境][DEBI]を構築するためのアプリケーションである [Debian noroot][DBNR] に対応するアプリケーションをインストールする為の Formula 群です。
+この [Linuxbrew][BREW] 向け Tap リポジトリは、 [pelya 氏][PELY]によって開発された [Android OS][ANDR] 上において root 権限を取ること無く、 [Debian 環境][DEBI]を構築するためのアプリケーションである [Debian noroot][DBNR] の環境に対応するアプリケーションをインストールする為の Formula 群です。
 
 ## 使用法
 
