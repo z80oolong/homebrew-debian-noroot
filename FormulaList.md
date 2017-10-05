@@ -10,6 +10,8 @@
 
 [Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] をインストールする為の Formula です。
 
+
+
 なお、 [Dropbear][DROP] の起動には、 ```$HOMEBREW_PREFIX/etc/dropbear.d``` スクリプトを使用して下さい。
 
 ## z80oolong/debian-noroot/libandroid-pty
