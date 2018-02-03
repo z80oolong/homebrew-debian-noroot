@@ -8,7 +8,12 @@
 
 ## 使用法
 
-まず最初に、 [Linuxbrew の公式ページ][BREW]及び [thermes 氏][THER]による "[Linuxbrew のススメ][THBR]" の記事に基づいて、 [Debian noroot 環境][DBNR] に [Linuxbrew][BREW] を構築し、以下のように  ```brew tap``` コマンドを用いて本リポジトリを導入します。
+まず最初に、以下に示す Qiita の投稿及び Web ページの記述に基づいて、 [Debian noroot 環境][DBNR] に [Linuxbrew][BREW] を構築し、以下のように  ```brew tap``` コマンドを用いて本リポジトリを導入します。
+
+
+- [thermes 氏][THER]による "[Linuxbrew のススメ][THBR]" の投稿
+- "[Debian noroot 環境に Linuxbrew を導入する][ZOLQ]" の投稿
+- [Linuxbrew の公式ページ][BREW]
 
 そして、本リポジトリに含まれる Formula を以下のようにインストールします。
 
@@ -50,5 +55,6 @@
 [DEBI]:https://www.debian.org/index.ja.html
 [THER]:https://qiita.com/thermes
 [THBR]:https://qiita.com/thermes/items/926b478ff6e3758ecfea
+[ZOLQ]:https://qiita.com/z80oolong/items/bfa986438adf8aac51ab
 [BSD2]:https://opensource.org/licenses/BSD-2-Clause
 [ZOOL]:http://zool.jpn.org/
