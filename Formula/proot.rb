@@ -3,12 +3,17 @@ require Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb"
 class Proot < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
-  url "https://github.com/termux/proot/archive/edc869d60c7f5b6abf67052a327ef099aded7777.zip"
+  url "https://github.com/termux/proot/archive/454b0b121f03a662f53844a8865f518757e0a315.zip"
   version "5.1.0-gedc869d6"
-  sha256 "3b1a579a108c17e897ef8da02ed7af8d77000c5d9946ed72f113f87ce61f5637"
+  sha256 "571a56af65969dbb26096893c32a5121e5cb3acd8d5fb6de8130765579bd2eb0"
 
   head do
     url "https://github.com/termux/proot.git"
+  end
+
+  patch do
+    url "https://github.com/z80oolong/proot-termux-build/releases/download/v0.3/proot-termux-fix.diff"
+    sha256 "980d69b2f04914e8b3504a4b0f2f6fbfc034b4126bc301e70b7d86f5fee5ee08"
   end
 
   depends_on "z80oolong/debian-noroot/talloc"
