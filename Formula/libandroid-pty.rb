@@ -1,8 +1,8 @@
-require Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb"
+$:.unshift("#{Tap.fetch("z80oolong/debian-noroot").path}")
+
+require "lib/preload_dir"
 
 class LibandroidPty < Formula
-  include InstallPreloadSO
-
   desc "Preloaded dynamic library for pseudo terminal function on Debian noroot."
   homepage "http://qiita.com/z80oolong/items/d3585cd5542d3d60ce12"
   url "https://github.com/z80oolong/libandroid-pty/archive/v0.1.1.tar.gz"
@@ -20,6 +20,21 @@ class LibandroidPty < Formula
     system "make", "GCC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_PTY_SO=#{name}.so"
     system "make", "install", "INSTALL_PREFIX=#{prefix}"
     
-    preload_dir.install_preload_dir("#{name}.so")
+    Pathname::PreloadDir.install(lib/"#{name}.so")
+
+    lib.rmtree; include.rmtree
+    prefix.install "README.md" => "#{name}-#{version}.md"
+  end
+  
+  def caveats
+    current_file = Pathname::PreloadDir.current("#{name}.so")
+    ; <<~EOS
+    To use a preloaded dynamic library `#{name}.so`, set environment variable LD_PRELOAD to `#{current_file}`:
+
+    for example:    
+    $ export LD_PRELOAD="... #{current_file}"
+    or
+    $ /usr/bin/env LD_PRELOAD="... #{current_file}" linux_command
+    EOS
   end
 end

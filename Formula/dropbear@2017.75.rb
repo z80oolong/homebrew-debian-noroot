@@ -1,27 +1,15 @@
-class Dropbear < Formula
+class DropbearAT201775 < Formula
   desc "Small SSH server/client for POSIX-based system"
   homepage "https://matt.ucc.asn.au/dropbear/dropbear.html"
-  url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2018.76.tar.bz2"
-  mirror "https://dropbear.nl/mirror/dropbear-2018.76.tar.bz2"
-  sha256 "f2fb9167eca8cf93456a5fc1d4faf709902a3ab70dd44e352f3acbc3ffdaea65"
+  url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2017.75.tar.bz2"
+  mirror "https://dropbear.nl/mirror/dropbear-2017.75.tar.bz2"
+  sha256 "6cbc1dcb1c9709d226dff669e5604172a18cf5dbf9a201474d5618ae4465098c"
 
-  head do
-    url "https://github.com/mkj/dropbear.git"
+  keg_only :versioned_formula
 
-    depends_on "automake" => :build
-    depends_on "autoconf" => :build
-  end
-
-  if build.head? then
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-HEAD-d740dc54-fix.diff"
-      sha256 "e004b949a0d3fc7e77d25a36d4300af3f3777ca6d95ad6391de83dfaee8e9581"
-    end
-  else
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-2018.76-fix.diff"
-      sha256 "4cc496af7a1ac522cfe37f6352b8f12ced33af9910b444bded8488827d3c0019"
-    end
+  patch do
+    url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-2017.75-fix.diff"
+    sha256 "25a77a049dc2f604158bc38d6c0dda71f3ec11d2e238e1226b69a7500c599dc9"    
   end
 
   depends_on "daemonize" => :recommended

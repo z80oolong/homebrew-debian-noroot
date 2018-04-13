@@ -1,8 +1,8 @@
-require Tap.fetch("z80oolong/debian-noroot").path/"lib/install_preload.rb"
+$:.unshift("#{Tap.fetch("z80oolong/debian-noroot").path}")
+
+require "lib/preload_dir"
 
 class LibandroidShmem < Formula
-  include InstallPreloadSO
-
   desc "libandroid-shmem.so by Termux developer team on Debian noroot"
   homepage "https://gist.github.com/z80oolong/247dbbb0a7d83a1dea98de2939327432"
   url "https://github.com/termux/libandroid-shmem/archive/v0.2.tar.gz"
@@ -15,7 +15,7 @@ class LibandroidShmem < Formula
   end
 
   patch do
-    url "https://gist.githubusercontent.com/z80oolong/247dbbb0a7d83a1dea98de2939327432/raw/36b2bd0bf29faf0c43dbcfbedde5d8b48a92aaf3/libandroid-shmem-termux-0.2_1-fix.diff"
+    url "https://raw.githubusercontent.com/z80oolong/diffs/master/libandroid-shmem/libandroid-shmem-termux-0.2_1-fix.diff"
     sha256 "cf3409ce8ef642e72a00e51c80e6993db3d4fe2886d19dff013ae350055236fc"
   end
 
@@ -26,6 +26,21 @@ class LibandroidShmem < Formula
     system "make", "CC=#{gcc}", "STRIP=#{strip}", "LIBANDROID_SHMEM_SO=#{name}.so"
     system "make", "install", "PREFIX=#{prefix}", "LIBANDROID_SHMEM_SO=#{name}.so"
 
-    Pathname.preload_dir.install_preload_dir("#{name}.so")
+    Pathname::PreloadDir.install(lib/"#{name}.so")
+
+    lib.rmtree; include.rmtree
+    prefix.install "README.md" => "#{name}-#{version}.md"
+  end
+  
+  def caveats
+    current_file = Pathname::PreloadDir.current("#{name}.so")
+    ; <<~EOS
+    To use a preloaded dynamic library `#{name}.so`, set environment variable LD_PRELOAD to `#{current_file}`:
+
+    for example:    
+    $ export LD_PRELOAD="... #{current_file}"
+    or
+    $ /usr/bin/env LD_PRELOAD="... #{current_file}" linux_command
+    EOS
   end
 end
