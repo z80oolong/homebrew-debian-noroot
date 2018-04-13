@@ -18,7 +18,7 @@
 
 [Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の安定版である dropbear-2017.75 をインストールする為の Formula です。
 
-
+**この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
 
 ### z80oolong/debian-noroot/libandroid-pty
 
