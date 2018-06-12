@@ -1,9 +1,11 @@
-class Talloc < Formula
+class TallocAT2111 < Formula
   desc "Hierarchical, reference-counted memory pool with destructors"
   homepage "https://talloc.samba.org/"
   url "https://www.samba.org/ftp/talloc/talloc-2.1.11.tar.gz"
   mirror "https://sources.voidlinux.eu/talloc-2.1.11/talloc-2.1.11.tar.gz"
   sha256 "639eb35556a0af999123c4d883e79be05ff9f00ab4f9e4ac2e5775f9c5eeeed3"
+
+  keg_only :versioned_formula
 
   def install
     ENV.append "CFLAGS", "-I#{include} -I#{HOMEBREW_PREFIX}/include"
@@ -37,6 +39,7 @@ class Talloc < Formula
         return ret;
       }
     EOS
+
     system ENV.cc, "-I#{include}", "-L#{lib}", "test.c", "-o", "test", "-ltalloc"
     system testpath/"test"
   end

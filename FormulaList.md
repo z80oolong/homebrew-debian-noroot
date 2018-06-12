@@ -44,17 +44,30 @@
 
 詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
 
-### z80oolong/debian-noroot/talloc
+### z80oolong/debian-noroot/proot@0.5.1
+
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.5.1 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+
+なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
+
+詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
+
+### z80oolong/debian-noroot/proot@0.5
+
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.5 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+
+なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
+
+詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
+
+
+### z80oolong/debian-noroot/talloc@2.1.11
 
 メモリ管理ライブラリである [talloc 2.1.11][TLOC] をインストールするための Formula です。オリジナルの [talloc][TLOC] の Formula と異なり、動的ライブラリの他に静的ライブラリもインストールします。
 
-前述の Formula である ```z80oolong/debian-noroot/proot``` に依存する Formula です。
+前述の Formula である ```z80oolong/debian-noroot/proot, z80oolong/debian-noroot/proot@{0.5,0.5.1}``` に依存する Formula です。
 
-### z80oolong/debian-noroot/automake
-
-Unix 系 OS においてソフトウェアパッケージ開発を行うための、ツール及びフレームワークの一種である autotool を構成する automake を導入するための Formula です。
-
-オリジナルの automake と異なり、実行ファイル ```automake, aclocal``` から ```automake-x.y, aclocal-x.y``` へのリンクは、ハードリンクに代えてシンボリックリンクを張ります。(ここに、 x, y は、 automake のバージョン番号を示す。)
+**なお、この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
 
 ## 一部 Formula に関する注意点
 
@@ -70,7 +83,7 @@ Unix 系 OS においてソフトウェアパッケージ開発を行うため�
 
 ```
 export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew    # (ここに、環境変数 HOMEBREW_PREFIX の値は Linuxbrew 本体のリポジトリのパスを指定すること。)
-export "LD_PRELOAD=/libdisableselinux.so /libandroid-shmem.so ${HOMEBREW_PREFIX}/preload/libandroid-pty-xxxxxxxx.so"    # (ここに、 xxxxxxxx は、インストール時刻によって決まる 8 桁の 16 進数)
+export "LD_PRELOAD=/libdisableselinux.so /libandroid-shmem.so ${HOMEBREW_PREFIX}/preload/libandroid-pty-********.so"    # (ここに、 ******** は、インストール時刻によって決まる 8 桁の 16 進数)
 ```
 
 これは、 [Linuxbrew][BREW] を用いてこれらの動的ライブラリ等を導入する際に、 ```brew install``` コマンドが既存に導入した動的ライブラリ等を削除若しくは上書きすることを防ぎ、```brew install``` コマンドの完了まで既存の動的ライブラリ等を残すことで、 [Debian noroot 環境][DBNR]全体が不具合を起こすのを防ぐ為です。

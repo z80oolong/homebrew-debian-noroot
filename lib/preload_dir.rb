@@ -7,10 +7,13 @@ class ::Pathname
   private
 
   def split_ext(path)
-    path = ::Pathname.new(path)
-    base = path.basename(".*"); ext = path.extname
+    base = ::Pathname.new(path).basename.to_s
 
-    return [base, ext]
+    if /(^[^@]*(?:@\d+(?:\.\d+)*)?)\.?([^\.]*)$/ === base then
+      return [$1, $2]
+    end
+
+    raise "Irregal path name `#{path}`"
   end
 
   alias :__install__ :install
@@ -30,7 +33,7 @@ class ::Pathname
 
       @current ||= Pathname.glob("#{self}/#{base}-[0-9a-f]*#{ext}").max {|f1,f2| f1.ctime <=> f2.ctime}
 
-      return self/"#{base}-xxxxxxxxx#{ext}" unless @current
+      return self/"#{base}-********#{ext}" unless @current
       return @current
     end
   end
