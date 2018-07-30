@@ -2,7 +2,7 @@ $:.unshift("#{Tap.fetch("z80oolong/debian-noroot").path}")
 
 require "lib/preload_dir"
 
-class Proot < Formula
+class ProotAT07 < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
   url "https://github.com/termux/proot/archive/b4afbd31d93ab7050303bdd749a97f65709439eb.zip"
@@ -27,6 +27,7 @@ class Proot < Formula
                            "LDFLAGS=-L#{f_talloc.opt_lib}\ -L#{HOMEBREW_PREFIX}/lib\ -static\ -ltalloc\ -Wl,-z,noexecstack", "V=1"
       system "make", "install", "PREFIX=#{prefix}"
       system "strip", "#{bin}/proot"
+      system "mv", "#{bin}/proot", "#{bin}/#{name}"
     end
 
     Pathname::PreloadDir.install(bin/"#{name}")

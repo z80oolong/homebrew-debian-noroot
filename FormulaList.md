@@ -60,14 +60,41 @@
 
 詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
 
+### z80oolong/debian-noroot/proot@0.6
+
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.6 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+
+なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
+
+詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
+
+### z80oolong/debian-noroot/proot@0.7
+
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の現行版である 0.7 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+
+なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
+
+詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
 
 ### z80oolong/debian-noroot/talloc@2.1.11
 
 メモリ管理ライブラリである [talloc 2.1.11][TLOC] をインストールするための Formula です。オリジナルの [talloc][TLOC] の Formula と異なり、動的ライブラリの他に静的ライブラリもインストールします。
 
-前述の Formula である ```z80oolong/debian-noroot/proot, z80oolong/debian-noroot/proot@{0.5,0.5.1}``` に依存する Formula です。
+前述の Formula である ```z80oolong/debian-noroot/proot@{0.5,0.5.1,0.6}``` に依存する Formula です。
 
 **なお、この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/talloc@2.1.14
+
+メモリ管理ライブラリである [talloc 2.1.14][TLOC] をインストールするための Formula です。オリジナルの [talloc][TLOC] の Formula と異なり、動的ライブラリの他に静的ライブラリもインストールします。
+
+前述の Formula である ```z80oolong/debian-noroot/proot, z80oolong/debian-noroot/proot@0.7``` に依存する Formula です。
+
+**なお、この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/go
+
+[Go 言語][GO__]の処理系 go をインストールするための Formula です。オリジナルの [go][GO__] の Formula と異なり、 32 bit ARM アーキテクチャ及び 32 bit x86 アーキテクチャに対応した [go][GO__] 言語の処理系を導入します。
 
 ## 一部 Formula に関する注意点
 
@@ -102,3 +129,4 @@ export "LD_PRELOAD=/libdisableselinux.so /libandroid-shmem.so ${HOMEBREW_PREFIX}
 [TMPR]:https://github.com/termux/proot
 [TMPQ]:https://qiita.com/z80oolong/items/20a1cc75722b98bd3a2c
 [TLOC]:https://talloc.samba.org/talloc/doc/html/index.html
+[GO__]:https://golang.org/

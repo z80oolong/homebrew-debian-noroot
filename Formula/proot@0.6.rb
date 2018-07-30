@@ -2,22 +2,22 @@ $:.unshift("#{Tap.fetch("z80oolong/debian-noroot").path}")
 
 require "lib/preload_dir"
 
-class Proot < Formula
+class ProotAT06 < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
-  url "https://github.com/termux/proot/archive/b4afbd31d93ab7050303bdd749a97f65709439eb.zip"
-  version "0.7"
-  sha256 "46587d33ecebb08bccc077f1a9336de84579d3f2e8a6a923814060fd7c06013c"
+  url "https://github.com/termux/proot/archive/3bc06868508b858e9dc290e29815ecd690e9cb0c.zip"
+  version "0.6"
+  sha256 "6214cc47d468c04503fd004a2c44f77986ad110857446525087389524e32b86e"
 
   patch do
-    url "https://github.com/z80oolong/proot-termux-build/releases/download/v0.7/proot-termux-fix.diff"
-    sha256 "0d223028402558f0a3e91a0fdd2b868438c5e095acc8f6f37a35748869902904"
+    url "https://github.com/z80oolong/proot-termux-build/releases/download/v0.6/proot-termux-fix.diff"
+    sha256 "bcad2f10ead98391a6ab6ffb913a87e48f07755d3190361400e99ffb8b7a8f48"
   end
 
-  depends_on "z80oolong/debian-noroot/talloc@2.1.14"
+  depends_on "z80oolong/debian-noroot/talloc@2.1.11"
 
   def install
-    f_talloc = Formula["z80oolong/debian-noroot/talloc@2.1.14"]
+    f_talloc = Formula["z80oolong/debian-noroot/talloc@2.1.11"]
 
     cd "src" do
       ENV.append "LC_ALL", "C"
@@ -27,6 +27,7 @@ class Proot < Formula
                            "LDFLAGS=-L#{f_talloc.opt_lib}\ -L#{HOMEBREW_PREFIX}/lib\ -static\ -ltalloc\ -Wl,-z,noexecstack", "V=1"
       system "make", "install", "PREFIX=#{prefix}"
       system "strip", "#{bin}/proot"
+      system "mv", "#{bin}/proot", "#{bin}/#{name}"
     end
 
     Pathname::PreloadDir.install(bin/"#{name}")
