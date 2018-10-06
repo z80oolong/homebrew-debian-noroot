@@ -15,11 +15,6 @@ class DropbearAT201775 < Formula
   depends_on "daemonize" => :recommended
 
   def install
-    if build.head?
-      system "autoconf"
-      system "autoheader"
-    end
-
     ENV.append "CFLAGS", "-DDEBIAN_NOROOT -DDEBUG_TRACE"
     ENV.append "CFLAGS", %{-DDSS_PRIV_FILENAME=\\"#{etc}/dropbear/dropbear_dss_host_key\\"}
     ENV.append "CFLAGS", %{-DRSA_PRIV_FILENAME=\\"#{etc}/dropbear/dropbear_rsa_host_key\\"}

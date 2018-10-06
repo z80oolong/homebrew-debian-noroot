@@ -16,7 +16,13 @@
 
 ### z80oolong/debian-noroot/dropbear@2017.75
 
-[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の安定版である dropbear-2017.75 をインストールする為の Formula です。
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の旧安定版である dropbear-2017.75 をインストールする為の Formula です。
+
+**この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/dropbear@2018.76
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の現行の安定版である dropbear-2018.76 をインストールする為の Formula です。
 
 **この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
 
@@ -54,7 +60,7 @@
 
 ### z80oolong/debian-noroot/proot@0.5
 
-[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.5 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧安定版である 0.5 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
 
 なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
 
@@ -62,7 +68,7 @@
 
 ### z80oolong/debian-noroot/proot@0.6
 
-[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.6 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧安定版である 0.6 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
 
 なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
 
@@ -70,7 +76,7 @@
 
 ### z80oolong/debian-noroot/proot@0.7
 
-[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.7 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧安定版である 0.7 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
 
 なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
 
@@ -78,7 +84,7 @@
 
 ### z80oolong/debian-noroot/proot@0.8
 
-[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧版である 0.8 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧安定版である 0.8 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
 
 なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
 
