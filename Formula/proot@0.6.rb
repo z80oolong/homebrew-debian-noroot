@@ -1,6 +1,6 @@
 $:.unshift("#{Tap.fetch("z80oolong/debian-noroot").path}")
 
-require "lib/preload_dir"
+require "Libary/preload_dir"
 
 class ProotAT06 < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
@@ -41,7 +41,7 @@ class ProotAT06 < Formula
     
     for example:
     ...
-    .#{Pathname::PreloadDir.current("#{name}")} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ...
+    .#{Pathname::PreloadDir}/#{name} -r `pwd` -w / -b /dev -b /proc -b /sys -b /system ...
     ...
     EOS
   end
