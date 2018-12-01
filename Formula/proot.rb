@@ -42,7 +42,7 @@ class Proot < Formula
       system "strip", "#{bin}/proot"
     end
 
-    Pathname::PreloadDir.install(bin/"#{name}")
+    install_preload bin/"#{name}"
 
     bin.rmtree
     prefix.install "README.md" => "#{name}-#{version}.md"
