@@ -43,41 +43,22 @@ class Openssh < Formula
   depends_on "openssl"
   depends_on "ldns" => :optional
   depends_on "pkg-config" => :build if build.with? "ldns"
+  depends_on "z80oolong/debian-noroot/krb5@1.16"
+  depends_on "libedit"
+  depends_on "zlib"
+  depends_on "lsof" => :test
   depends_on "daemonize" => :recommended
-
-  unless OS.mac?
-    depends_on "libedit"
-    depends_on "z80oolong/debian-noroot/krb5@1.16"
-    depends_on "zlib"
-    depends_on "lsof" => :test
-  end
 
   resource "com.openssh.sshd.sb" do
     url "https://opensource.apple.com/source/OpenSSH/OpenSSH-209.50.1/com.openssh.sshd.sb"
     sha256 "a273f86360ea5da3910cfa4c118be931d10904267605cdd4b2055ced3a829774"
   end
 
-  # Both these patches are applied by Apple.
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/patches/1860b0a74/openssh/patch-sandbox-darwin.c-apple-sandbox-named-external.diff"
-    sha256 "d886b98f99fd27e3157b02b5b57f3fb49f43fd33806195970d4567f12be66e71"
-  end if OS.mac?
-
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/patches/d8b2d8c2/openssh/patch-sshd.c-apple-sandbox-named-external.diff"
-    sha256 "3505c58bf1e584c8af92d916fe5f3f1899a6b15cc64a00ddece1dc0874b2f78f"
-  end if OS.mac?
-
   def install
-    ENV.append "CPPFLAGS", "-D__APPLE_SANDBOX_NAMED_EXTERNAL__" if OS.mac?
     ENV.append "CFLAGS", "-DDEBIAN_NOROOT"
     ENV.append "CPPFLAGS", "-DDEBIAN_NOROOT"
 
     system "autoreconf" if build.head?
-
-    # Ensure sandbox profile prefix is correct.
-    # We introduce this issue with patching, it's not an upstream bug.
-    inreplace "sandbox-darwin.c", "@PREFIX@/share/openssh", etc/"ssh" if OS.mac?
 
     args = %W[
       --with-libedit
@@ -87,8 +68,7 @@ class Openssh < Formula
       --with-ssl-dir=#{Formula["openssl"].opt_prefix}
     ]
 
-    args << "--with-pam" if OS.mac?
-    args << "--with-privsep-path=#{var}/lib/sshd" unless OS.mac?
+    args << "--with-privsep-path=#{var}/lib/sshd"
     args << "--with-ldns" if build.with? "ldns"
 
     system "./configure", *args
@@ -119,14 +99,14 @@ class Openssh < Formula
         LOCK_FILE=/var/run/openssh.lock
 
         start_daemon () {
-      		echo "Start Dropbear Daemon..."
+      		echo "Start OpenSSH Daemon..."
         	export PATH=#{HOMEBREW_PREFIX}/sbin:#{HOMEBREW_PREFIX}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
         	#{%x[which daemonize].chomp} -a -p $PID_FILE -l $LOCK_FILE -e $LOG_FILE -o $LOG_FILE -v $OPENSSH $SERVER_OPTION -E $LOG_FILE
         }
 
         stop_daemon () {
         	if [ -e $LOCK_FILE ]; then
-        		echo "Stop Dropbear Daemon..."
+        		echo "Stop OpenSSH Daemon..."
         		kill -TERM `cat $PID_FILE`; rm -f $LOCK_FILE
         	fi
         }

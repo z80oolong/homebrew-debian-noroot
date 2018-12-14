@@ -11,9 +11,8 @@ class Krb5AT116 < Formula
 
   keg_only :versioned_formula
 
-  depends_on "openssl" => :recommend
-  depends_on "libressl" => :optional
-  depends_on "bison" unless OS.mac?
+  depends_on "openssl"
+  depends_on "bison"
 
   def install
     cd "src" do

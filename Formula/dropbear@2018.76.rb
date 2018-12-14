@@ -16,40 +16,40 @@ class DropbearAT201876 < Formula
 
   def install
     ENV.append "CFLAGS", "-DDEBIAN_NOROOT -DDEBUG_TRACE"
-    ENV.append "CFLAGS", %{-DDSS_PRIV_FILENAME=\\"#{etc}/dropbear/dropbear_dss_host_key\\"}
-    ENV.append "CFLAGS", %{-DRSA_PRIV_FILENAME=\\"#{etc}/dropbear/dropbear_rsa_host_key\\"}
-    ENV.append "CFLAGS", %{-DECDSA_PRIV_FILENAME=\\"#{etc}/dropbear/dropbear_ecdsa_host_key\\"}
+    ENV.append "CFLAGS", %{-DDSS_PRIV_FILENAME=\\"#{etc}/#{name}/dropbear_dss_host_key\\"}
+    ENV.append "CFLAGS", %{-DRSA_PRIV_FILENAME=\\"#{etc}/#{name}/dropbear_rsa_host_key\\"}
+    ENV.append "CFLAGS", %{-DECDSA_PRIV_FILENAME=\\"#{etc}/#{name}/dropbear_ecdsa_host_key\\"}
 
     system "./configure", "--prefix=#{prefix}",
                           "--disable-pam",
                           "--enable-zlib",
                           "--enable-bundled-libtom",
-                          "--sysconfdir=#{etc}/dropbear"
+                          "--sysconfdir=#{etc}/#{name}"
     system "make"
     system "make", "install"
   end
   
   def post_install
-    unless (etc/"dropbear").exist? && (etc/"dropbear").directory?
-      ohai "Make directory #{etc}/dropbear ..."
-      (etc/"dropbear").mkdir
+    unless (etc/"#{name}").exist? && (etc/"#{name}").directory?
+      ohai "Make directory #{etc}/#{name} ..."
+      (etc/"#{name}").mkdir
     end
 
-    unless (etc/"dropbear/dropbear.d").exist?
-      ohai "Create #{etc}/dropbear/dropbear.d ..."
+    unless (etc/"#{name}/dropbear.d").exist?
+      ohai "Create #{etc}/#{name}/dropbear.d ..."
 
-      (etc/"dropbear/dropbear.d").atomic_write(<<~EOS)
+      (etc/"#{name}/dropbear.d").atomic_write(<<~EOS)
         #!#{ENV['SHELL']}
 
         DROPBEAR=#{opt_sbin}/dropbear
         PORT=12022
         SERVER_OPTION="-W 65536 -s -w -g"
-        DSS_HOST_KEY=#{etc}/dropbear/dropbear_dss_host_key
-        RSA_HOST_KEY=#{etc}/dropbear/dropbear_rsa_host_key
-        ECDSA_HOST_KEY=#{etc}/dropbear/dropbear_ecdsa_host_key
-        PID_FILE=/var/run/dropbear.pid
-        LOG_FILE=/var/log/dropbear.log
-        LOCK_FILE=/var/run/dropbear.lock
+        DSS_HOST_KEY=#{etc}/#{name}/dropbear_dss_host_key
+        RSA_HOST_KEY=#{etc}/#{name}/dropbear_rsa_host_key
+        ECDSA_HOST_KEY=#{etc}/#{name}/dropbear_ecdsa_host_key
+        PID_FILE=/var/run/#{name}.pid
+        LOG_FILE=/var/log/#{name}.log
+        LOCK_FILE=/var/run/#{name}.lock
 
         start_daemon () {
       		echo "Start Dropbear Daemon..."
@@ -76,34 +76,34 @@ class DropbearAT201876 < Formula
         	exit 255
         fi
         EOS
-      (etc/"dropbear/dropbear.d").chmod(0700)
+      (etc/"#{name}/dropbear.d").chmod(0700)
     end
 
-    unless (etc/"dropbear/dropbear_dss_host_key").exist?
-      ohai "Make #{etc}/dropbear/dropbear_dss_host_key ..."
-      system "#{bin}/dropbearkey", "-t", "dss", "-f", "#{etc}/dropbear/dropbear_dss_host_key"
+    unless (etc/"#{name}/dropbear_dss_host_key").exist?
+      ohai "Make #{etc}/#{name}/dropbear_dss_host_key ..."
+      system "#{bin}/dropbearkey", "-t", "dss", "-f", "#{etc}/#{name}/dropbear_dss_host_key"
     end
 
-    unless (etc/"dropbear/dropbear_rsa_host_key").exist?
-      ohai "Make #{etc}/dropbear/dropbear_rsa_host_key ..."
-      system "#{bin}/dropbearkey", "-t", "rsa", "-f", "#{etc}/dropbear/dropbear_rsa_host_key"
+    unless (etc/"#{name}/dropbear_rsa_host_key").exist?
+      ohai "Make #{etc}/#{name}/dropbear_rsa_host_key ..."
+      system "#{bin}/dropbearkey", "-t", "rsa", "-f", "#{etc}/#{name}/dropbear_rsa_host_key"
     end
 
-    unless (etc/"dropbear/dropbear_ecdsa_host_key").exist?
-      ohai "Make #{etc}/dropbear/dropbear_ecdsa_host_key ..."
-      system "#{bin}/dropbearkey", "-t", "ecdsa", "-f", "#{etc}/dropbear/dropbear_ecdsa_host_key"
+    unless (etc/"#{name}/dropbear_ecdsa_host_key").exist?
+      ohai "Make #{etc}/#{name}/dropbear_ecdsa_host_key ..."
+      system "#{bin}/dropbearkey", "-t", "ecdsa", "-f", "#{etc}/#{name}/dropbear_ecdsa_host_key"
     end
   end
 
   def caveats; <<~EOS
     Script to start or stop dropbear daemon has been install to:
-      #{etc}/dropbear/dropbear.d
+      #{etc}/#{name}/dropbear.d
 
     To start dropbear daemon:
-      #{etc}/dropbear/dropbear.d start
+      #{etc}/#{name}/dropbear.d start
 
     To stop dropbear daemon:
-      #{etc}/dropbear/dropbear.d stop
+      #{etc}/#{name}/dropbear.d stop
     EOS
   end      
       
