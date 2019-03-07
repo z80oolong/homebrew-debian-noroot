@@ -43,7 +43,7 @@ class Openssh < Formula
   depends_on "openssl"
   depends_on "ldns" => :optional
   depends_on "pkg-config" => :build if build.with? "ldns"
-  depends_on "z80oolong/debian-noroot/krb5@1.16"
+  depends_on "krb5"
   depends_on "libedit"
   depends_on "zlib"
   depends_on "lsof" => :test
