@@ -17,8 +17,8 @@ class Dropbear < Formula
     url "https://github.com/mkj/dropbear.git"
 
     patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-HEAD-6f6ef483-fix.diff"
-      sha256 "74f9f56563f95c4f4328ebc93fdfbd836691e781aeb2f2707a3b07b855d85abc"
+      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-HEAD-cb945f9f-fix.diff"
+      sha256 "c243b10782b8384b9f5016d68d51a6a8857139452c0f235daa9977f2f91ae9b6"
     end
 
     depends_on "automake" => :build
