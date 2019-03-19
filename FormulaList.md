@@ -102,7 +102,15 @@
 
 ### z80oolong/debian-noroot/proot@5.1.0.109
 
-[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の現行版である 5.1.0.109 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の旧安定版である 5.1.0.109 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
+
+なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
+
+詳細については、後述する "一部 Formula に関する注意点" の項目を参照して下さい。
+
+### z80oolong/debian-noroot/proot@5.1.0.110
+
+[Termux の開発コミュニティ][TMUX]による [link2symlink 機能に対応した proot][TMPR] の現行版である 5.1.0.110 をインストールするための Formula です。詳細については、 "[Debian noroot 環境において link2symlink 機能を実装した proot を導入する][TMPQ]" の記事を参照して下さい。
 
 なお、 link2symlink 機能に対応した [proot][TMPR] は、 [Debian noroot 環境][DBNR]の初期化ファイルである ```/proot.sh``` に設定を行うアプリケーションであるため、 **[proot][TMPR] の実体は、ディレクトリ ```$HOMEBREW_PREFIX/preload``` にインストールされることに留意して下さい。**
 
@@ -124,13 +132,9 @@
 
 **なお、この Formula は、 versioned formula であるため、この Formula によって導入される [talloc][TLOC] は、 keg only で導入されることに留意して下さい。**
 
-### z80oolong/debian-noroot/krb5@1.16
+### z80oolong/debian-noroot/perl
 
-Kerberos 認証の実装系ライブラリである [krb5 1.16][KRB5] をインストールするための Formula です。オリジナルの [KRB5][KRB5] の Formula と異なり、 [LibreSSL][LIBS] に対応する修正が適用されています。
-
-前述の Formula である ```z80oolong/debian-noroot/openssh``` に依存する Formula です。
-
-**なお、この Formula は、 versioned formula であるため、この Formula によって導入される [KRB5][KRB5] は、 keg only で導入されることに留意して下さい。**
+Perl 言語処理系を導入するための Formula です。オリジナルの Formula と異なり、アーキテクチャの誤検出の修正等、コンパイル時の幾つかの問題の修正を行っています。
 
 ## 一部 Formula に関する注意点
 
