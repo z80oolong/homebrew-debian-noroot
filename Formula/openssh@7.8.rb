@@ -1,27 +1,17 @@
-class Openssh < Formula
+class OpensshAT78 < Formula
   desc "OpenBSD freely-licensed SSH connectivity tools"
   homepage "https://www.openssh.com/"
   url "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.8p1.tar.gz"
   mirror "https://mirror.vdms.io/pub/OpenBSD/OpenSSH/portable/openssh-7.8p1.tar.gz"
   version "7.8p1"
+  revision 1
   sha256 "1a484bb15152c183bb2514e112aa30dd34138c3cfb032eee5490a66c507144ca"
 
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.9p1-fix.diff"
-      sha256 "7d8edac16e00d7cda2c8f1190a5c448ec39bc6f56b3a48a8c42f5247a8393254"
-    end
-  end
+  keg_only :versioned_formula
 
-  head do
-    url "https://anongit.mindrot.org/openssh.git"
-
-    depends_on "automake" => :build
-    depends_on "autoconf" => :build
-
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-HEAD-9edbd782-fix.diff"
-      sha256 "e92e60465bcd0a33def04a97a64a37ef594101465989cd5ad447f9d1c0a6efc2"
-    end
+  patch do
+    url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.8p1_1-fix.diff"
+    sha256 "b336fd3bdf5400488860cab23e8a33932f66ecf58b7de04e5016fbe800884b9f"
   end
 
   # Please don't resubmit the keychain patch option. It will never be accepted.
@@ -51,7 +41,7 @@ class Openssh < Formula
       --with-libedit
       --with-kerberos5
       --prefix=#{prefix}
-      --sysconfdir=#{etc}/ssh
+      --sysconfdir=#{etc}/ssh@#{version}
       --with-ssl-dir=#{Formula["openssl"].opt_prefix}
     ]
 
@@ -69,18 +59,18 @@ class Openssh < Formula
     bin.install_symlink bin/"ssh" => "slogin"
 
     buildpath.install resource("com.openssh.sshd.sb")
-    (etc/"ssh").install "com.openssh.sshd.sb" => "org.openssh.sshd.sb"
+    (etc/"ssh@#{version}").install "com.openssh.sshd.sb" => "org.openssh.sshd.sb"
   end
 
   def post_install
-    unless (etc/"ssh/openssh.d").exist?
-      ohai "Create #{etc}/ssh/openssh.d ..."
+    unless (etc/"ssh@#{version}/openssh.d").exist?
+      ohai "Create #{etc}/ssh@#{version}/openssh.d ..."
 
-      (etc/"ssh/openssh.d").atomic_write(<<~EOS)
+      (etc/"ssh@#{version}/openssh.d").atomic_write(<<~EOS)
         #!#{ENV['SHELL']}
 
         OPENSSH=#{opt_sbin}/sshd
-        SERVER_OPTION="-f #{etc}/ssh/sshd_config"
+        SERVER_OPTION="-f #{etc}/ssh@#{version}/sshd_config"
         PID_FILE=/var/run/openssh.pid
         LOG_FILE=/var/log/openssh.log
         LOCK_FILE=/var/run/openssh.lock
@@ -110,7 +100,7 @@ class Openssh < Formula
         	exit 255
         fi
         EOS
-      (etc/"ssh/openssh.d").chmod(0700)
+      (etc/"ssh@#{version}/openssh.d").chmod(0700)
     end
   end
 

@@ -4,11 +4,14 @@ class OpensshAT79 < Formula
   url "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz"
   mirror "https://mirror.vdms.io/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz"
   version "7.9p1"
+  revision 1
   sha256 "6b4b3ba2253d84ed3771c8050728d597c91cfce898713beb7b64a305b6f11aad"
 
+  keg_only :versioned_formula
+
   patch do
-    url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.9p1-fix.diff"
-    sha256 "7d8edac16e00d7cda2c8f1190a5c448ec39bc6f56b3a48a8c42f5247a8393254"
+    url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.9p1_1-fix.diff"
+    sha256 "0f764441dd8b1a3ecddc7fd31d0a8d58a735a8ed5cbdc24ddd42d59364b0641d"
   end
 
   # Please don't resubmit the keychain patch option. It will never be accepted.
@@ -38,7 +41,7 @@ class OpensshAT79 < Formula
       --with-libedit
       --with-kerberos5
       --prefix=#{prefix}
-      --sysconfdir=#{etc}/ssh
+      --sysconfdir=#{etc}/ssh@#{version}
       --with-ssl-dir=#{Formula["openssl"].opt_prefix}
     ]
 
@@ -56,18 +59,18 @@ class OpensshAT79 < Formula
     bin.install_symlink bin/"ssh" => "slogin"
 
     buildpath.install resource("com.openssh.sshd.sb")
-    (etc/"ssh").install "com.openssh.sshd.sb" => "org.openssh.sshd.sb"
+    (etc/"ssh@#{version}").install "com.openssh.sshd.sb" => "org.openssh.sshd.sb"
   end
 
   def post_install
-    unless (etc/"ssh/openssh.d").exist?
-      ohai "Create #{etc}/ssh/openssh.d ..."
+    unless (etc/"ssh@#{version}/openssh.d").exist?
+      ohai "Create #{etc}/ssh@#{version}/openssh.d ..."
 
-      (etc/"ssh/openssh.d").atomic_write(<<~EOS)
+      (etc/"ssh@#{version}/openssh.d").atomic_write(<<~EOS)
         #!#{ENV['SHELL']}
 
         OPENSSH=#{opt_sbin}/sshd
-        SERVER_OPTION="-f #{etc}/ssh/sshd_config"
+        SERVER_OPTION="-f #{etc}/ssh@#{version}/sshd_config"
         PID_FILE=/var/run/openssh.pid
         LOG_FILE=/var/log/openssh.log
         LOCK_FILE=/var/run/openssh.lock
@@ -97,7 +100,7 @@ class OpensshAT79 < Formula
         	exit 255
         fi
         EOS
-      (etc/"ssh/openssh.d").chmod(0700)
+      (etc/"ssh@#{version}/openssh.d").chmod(0700)
     end
   end
 

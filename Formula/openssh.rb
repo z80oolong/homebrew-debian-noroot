@@ -6,11 +6,12 @@ class Openssh < Formula
     url "https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz"
     mirror "https://mirror.vdms.io/pub/OpenBSD/OpenSSH/portable/openssh-7.9p1.tar.gz"
     version "7.9p1"
+    revision 1
     sha256 "6b4b3ba2253d84ed3771c8050728d597c91cfce898713beb7b64a305b6f11aad"
 
     patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.9p1-fix.diff"
-      sha256 "7d8edac16e00d7cda2c8f1190a5c448ec39bc6f56b3a48a8c42f5247a8393254"
+      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.9p1_1-fix.diff"
+      sha256 "0f764441dd8b1a3ecddc7fd31d0a8d58a735a8ed5cbdc24ddd42d59364b0641d"
     end
   end
 
@@ -21,8 +22,8 @@ class Openssh < Formula
     depends_on "autoconf" => :build
 
     patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-HEAD-9edbd782-fix.diff"
-      sha256 "e92e60465bcd0a33def04a97a64a37ef594101465989cd5ad447f9d1c0a6efc2"
+      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-HEAD-5de397a8-fix.diff"
+      sha256 "7d49873dfd5749e66c4d12d15aab5558292063f7aeb10aaa92f551e77f2dcd01"
     end
   end
 

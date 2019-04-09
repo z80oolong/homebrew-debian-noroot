@@ -36,6 +36,22 @@
 
 なお、 [OpenSSH][OSSH] の起動には、 ```$HOMEBREW_PREFIX/etc/ssh/openssh.d``` スクリプトを使用して下さい。
 
+### z80oolong/debian-noroot/openssh@7.8
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された標準的な SSH サーバである [OpenSSH][OSSH] の旧安定版である 7.8 をインストールする為の Formula です。
+
+なお、 [OpenSSH][OSSH] の起動には、 ```$HOMEBREW_PREFIX/etc/ssh@7.8p*/openssh.d (ここに、 p* はパッチレベル。)``` スクリプトを使用して下さい。
+
+**また、この Formula は、 versioned formula であるため、この Formula によって導入される [OpenSSH][OSSH] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/openssh@7.9
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された標準的な SSH サーバである [OpenSSH][OSSH] の現行版である 7.9 をインストールする為の Formula です。
+
+なお、 [OpenSSH][OSSH] の起動には、 ```$HOMEBREW_PREFIX/etc/ssh@7.9p*/openssh.d (ここに、 p* はパッチレベル。)``` スクリプトを使用して下さい。
+
+**また、この Formula は、 versioned formula であるため、この Formula によって導入される [OpenSSH][OSSH] は、 keg only で導入されることに留意して下さい。**
+
 ### z80oolong/debian-noroot/libandroid-pty
 
 [Debian noroot 環境][DBNR]において[擬似端末が正常に動作しない問題][PTYP]を解決するための動的ライブラリ [libandroid-pty.so][PTYS] をインストールする為の Formula です。
