@@ -1,37 +1,19 @@
-class Dropbear < Formula
+class DropbearAT201978 < Formula
   desc "Small SSH server/client for POSIX-based system"
   homepage "https://matt.ucc.asn.au/dropbear/dropbear.html"
+  url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2019.78.tar.bz2"
+  sha256 "525965971272270995364a0eb01f35180d793182e63dd0b0c3eb0292291644a4"
 
-  stable do
-    url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2019.78.tar.bz2"
-    sha256 "525965971272270995364a0eb01f35180d793182e63dd0b0c3eb0292291644a4"
+  keg_only :versioned_formula
 
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-2018.78-fix.diff"
-      sha256 "5c94baa698fe048f74910724307ccc75ce0f73432db703ecdab5f40e7b2390a1"
-    end
-  end
-
-  head do
-    url "https://github.com/mkj/dropbear.git"
-
-    patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-HEAD-cae6e6af-fix.diff"
-      sha256 "5c94baa698fe048f74910724307ccc75ce0f73432db703ecdab5f40e7b2390a1"
-    end
-
-    depends_on "automake" => :build
-    depends_on "autoconf" => :build
+  patch do
+    url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-2018.78-fix.diff"
+    sha256 "5c94baa698fe048f74910724307ccc75ce0f73432db703ecdab5f40e7b2390a1"
   end
 
   depends_on "daemonize" => :recommended
 
   def install
-    if build.head?
-      system "autoconf"
-      system "autoheader"
-    end
-
     ENV.append "CFLAGS", "-DDEBIAN_NOROOT -DDEBUG_TRACE"
     ENV.append "CFLAGS", %{-DDSS_PRIV_FILENAME=\\"#{etc}/#{name}/dropbear_dss_host_key\\"}
     ENV.append "CFLAGS", %{-DRSA_PRIV_FILENAME=\\"#{etc}/#{name}/dropbear_rsa_host_key\\"}
