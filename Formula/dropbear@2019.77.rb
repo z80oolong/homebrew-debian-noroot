@@ -1,7 +1,7 @@
 class DropbearAT201977 < Formula
   desc "Small SSH server/client for POSIX-based system"
   homepage "https://matt.ucc.asn.au/dropbear/dropbear.html"
-  url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2018.77.tar.bz2"
+  url "https://matt.ucc.asn.au/dropbear/releases/dropbear-2019.77.tar.bz2"
   sha256 "d91f78ebe633be1d071fd1b7e5535b9693794048b019e9f4bea257e1992b458d"
 
   keg_only :versioned_formula

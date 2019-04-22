@@ -24,9 +24,25 @@
 
 ### z80oolong/debian-noroot/dropbear@2018.76
 
-[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の現行の安定版である dropbear-2018.76 をインストールする為の Formula です。
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の旧安定版である dropbear-2018.76 をインストールする為の Formula です。
 
 なお、 [Dropbear][DROP] の起動には、 ```$HOMEBREW_PREFIX/etc/dropbear@2018.76/dropbear.d``` スクリプトを使用して下さい。
+
+**この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/dropbear@2019.77
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の旧安定版である dropbear-2019.77 をインストールする為の Formula です。
+
+なお、 [Dropbear][DROP] の起動には、 ```$HOMEBREW_PREFIX/etc/dropbear@2019.77/dropbear.d``` スクリプトを使用して下さい。
+
+**この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/dropbear@2019.78
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された軽量 SSH サーバである [Dropbear][DROP] の現行の安定版である dropbear-2019.78 をインストールする為の Formula です。
+
+なお、 [Dropbear][DROP] の起動には、 ```$HOMEBREW_PREFIX/etc/dropbear@2019.78/dropbear.d``` スクリプトを使用して下さい。
 
 **この Formula は、 versioned formula であるため、この Formula によって導入される [Dropbear][DROP] は、 keg only で導入されることに留意して下さい。**
 
