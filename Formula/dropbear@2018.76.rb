@@ -8,7 +8,7 @@ class DropbearAT201876 < Formula
   keg_only :versioned_formula
 
   patch do
-    url "https://raw.githubusercontent.com/z80oolong/diffs/master/dropbear/dropbear-2018.76-fix.diff"
+    url "https://github.com/z80oolong/dropbear-debian-noroot-fix/raw/master/dropbear-2018.76-fix.diff"
     sha256 "4cc496af7a1ac522cfe37f6352b8f12ced33af9910b444bded8488827d3c0019"
   end
 
