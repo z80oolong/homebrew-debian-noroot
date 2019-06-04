@@ -7,7 +7,7 @@ class Dropbear < Formula
     sha256 "525965971272270995364a0eb01f35180d793182e63dd0b0c3eb0292291644a4"
 
     patch do
-      url "https://github.com/z80oolong/dropbear-debian-noroot-fix/raw/master/dropbear-2019.78-fix.diff"
+      url "https://raw.githubusercontent.com/z80oolong/dropbear-debian-noroot-fix/master/dropbear-2019.78-fix.diff"
       sha256 "5c94baa698fe048f74910724307ccc75ce0f73432db703ecdab5f40e7b2390a1"
     end
   end
@@ -16,7 +16,7 @@ class Dropbear < Formula
     url "https://github.com/mkj/dropbear.git"
 
     patch do
-      url "https://github.com/z80oolong/dropbear-debian-noroot-fix/raw/master/dropbear-HEAD-fa116e98-fix.diff"
+      url "https://raw.githubusercontent.com/z80oolong/dropbear-debian-noroot-fix/master/dropbear-HEAD-fa116e98-fix.diff"
       sha256 "3313d56ea2fe4d2d942bd076729b5e725260f072ed6df72c4fc0a8850d3d2f7d"
     end
 

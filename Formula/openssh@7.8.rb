@@ -10,7 +10,7 @@ class OpensshAT78 < Formula
   keg_only :versioned_formula
 
   patch do
-    url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-7.8p1_1-fix.diff"
+    url "https://raw.githubusercontent.com/z80oolong/openssh-debian-noroot-fix/master/openssh-7.8p1_1-fix.diff"
     sha256 "b336fd3bdf5400488860cab23e8a33932f66ecf58b7de04e5016fbe800884b9f"
   end
 

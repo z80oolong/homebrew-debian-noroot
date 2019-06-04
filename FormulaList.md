@@ -62,9 +62,17 @@
 
 ### z80oolong/debian-noroot/openssh@7.9
 
-[Debian noroot 環境][DBNR]において正常に動作するよう修正された標準的な SSH サーバである [OpenSSH][OSSH] の現行版である 7.9 をインストールする為の Formula です。
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された標準的な SSH サーバである [OpenSSH][OSSH] の旧安定版である 7.9 をインストールする為の Formula です。
 
 なお、 [OpenSSH][OSSH] の起動には、 ```$HOMEBREW_PREFIX/etc/ssh@7.9p*/openssh.d (ここに、 p* はパッチレベル。)``` スクリプトを使用して下さい。
+
+**また、この Formula は、 versioned formula であるため、この Formula によって導入される [OpenSSH][OSSH] は、 keg only で導入されることに留意して下さい。**
+
+### z80oolong/debian-noroot/openssh@8.0
+
+[Debian noroot 環境][DBNR]において正常に動作するよう修正された標準的な SSH サーバである [OpenSSH][OSSH] の現行版である 8.0 をインストールする為の Formula です。
+
+なお、 [OpenSSH][OSSH] の起動には、 ```$HOMEBREW_PREFIX/etc/ssh@8.0p*/openssh.d (ここに、 p* はパッチレベル。)``` スクリプトを使用して下さい。
 
 **また、この Formula は、 versioned formula であるため、この Formula によって導入される [OpenSSH][OSSH] は、 keg only で導入されることに留意して下さい。**
 

@@ -9,7 +9,7 @@ class Openssh < Formula
     sha256 "bd943879e69498e8031eb6b7f44d08cdc37d59a7ab689aa0b437320c3481fd68"
 
     patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-8.0p1-fix.diff"
+      url "https://raw.githubusercontent.com/z80oolong/openssh-debian-noroot-fix/master/openssh-8.0p1-fix.diff"
       sha256 "d545cdd987a493a66467c6a0444ee9d932ea6b4d94c9f06987964ed2303a8b6a"
     end
   end
@@ -21,7 +21,7 @@ class Openssh < Formula
     depends_on "autoconf" => :build
 
     patch do
-      url "https://raw.githubusercontent.com/z80oolong/diffs/master/openssh/openssh-HEAD-5de397a8-fix.diff"
+      url "https://raw.githubusercontent.com/z80oolong/openssh-debian-noroot-fix/master/openssh-HEAD-5de397a8-fix.diff"
       sha256 "7d49873dfd5749e66c4d12d15aab5558292063f7aeb10aaa92f551e77f2dcd01"
     end
   end
