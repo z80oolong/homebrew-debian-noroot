@@ -1,10 +1,9 @@
-class Proot < Formula
+class ProotAT510112 < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
-  url "https://github.com/z80oolong/proot-termux-build/releases/download/v5.1.0.113/proot-5.1.0.113.zip"
-  version "5.1.0.113"
-  sha256 "de76c29f57594bb9d5095bbe5e0d7dddb5a606f1b92b2d958a33bbcdebf8619e"
-  head "https://github.com/z80oolong/proot.git"
+  url "https://github.com/z80oolong/proot-termux-build/releases/download/v5.1.0.112/proot-5.1.0.112.zip"
+  version "5.1.0.112"
+  sha256 "39e8d35d693a2b1685023dad858a742d78bef2555fd57409d199baf1b485039f"
 
   depends_on "z80oolong/debian-noroot/talloc@2.1.14"
 
@@ -41,6 +40,7 @@ class Proot < Formula
                            "LDFLAGS=-L#{f_talloc.opt_lib}\ -L#{HOMEBREW_PREFIX}/lib\ -static\ -ltalloc\ -Wl,-z,noexecstack", "V=1"
       system "make", "install", "PREFIX=#{prefix}"
       system "strip", "#{bin}/proot"
+      system "mv", "#{bin}/proot", "#{bin}/#{name}"
     end
 
     install_preload bin/"#{name}"
