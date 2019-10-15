@@ -5,7 +5,7 @@ class ProotAT510112 < Formula
   version "5.1.0.112"
   sha256 "39e8d35d693a2b1685023dad858a742d78bef2555fd57409d199baf1b485039f"
 
-  depends_on "z80oolong/debian-noroot/talloc@2.1.14"
+  depends_on "z80oolong/debian-noroot/proot-talloc@2.1.14"
 
   private
 
@@ -30,7 +30,7 @@ class ProotAT510112 < Formula
   public
 
   def install
-    f_talloc = Formula["z80oolong/debian-noroot/talloc@2.1.14"]
+    f_talloc = Formula["z80oolong/debian-noroot/proot-talloc@2.1.14"]
 
     cd "src" do
       ENV.append "LC_ALL", "C"

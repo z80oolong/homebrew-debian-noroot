@@ -1,9 +1,9 @@
-class TallocAT2114 < Formula
+class ProotTallocAT2111 < Formula
   desc "Hierarchical, reference-counted memory pool with destructors"
   homepage "https://talloc.samba.org/"
-  url "https://www.samba.org/ftp/talloc/talloc-2.1.14.tar.gz"
-  mirror "https://sources.voidlinux.eu/talloc-2.1.14/talloc-2.1.14.tar.gz"
-  sha256 "b185602756a628bac507fa8af8b9df92ace69d27c0add5dab93190ad7c3367ce"
+  url "https://www.samba.org/ftp/talloc/talloc-2.1.11.tar.gz"
+  mirror "https://sources.voidlinux.eu/talloc-2.1.11/talloc-2.1.11.tar.gz"
+  sha256 "639eb35556a0af999123c4d883e79be05ff9f00ab4f9e4ac2e5775f9c5eeeed3"
 
   keg_only :versioned_formula
 

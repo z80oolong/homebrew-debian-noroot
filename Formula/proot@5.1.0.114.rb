@@ -1,16 +1,11 @@
-class ProotAT06 < Formula
+class ProotAT510114 < Formula
   desc "chroot, mount --bind, and binfmt_misc without privilege/setup"
   homepage "https://github.com/termux/proot"
-  url "https://github.com/termux/proot/archive/3bc06868508b858e9dc290e29815ecd690e9cb0c.zip"
-  version "0.6"
-  sha256 "6214cc47d468c04503fd004a2c44f77986ad110857446525087389524e32b86e"
+  url "https://github.com/z80oolong/proot-termux-build/releases/download/v5.1.0.114/proot-5.1.0.114.zip"
+  version "5.1.0.114"
+  sha256 "ab5377e3c260976abd7ad70c520e319eb21bc4d54292615ae62a543a8c53553c"
 
-  patch do
-    url "https://github.com/z80oolong/proot-termux-build/releases/download/v0.6/proot-termux-fix.diff"
-    sha256 "bcad2f10ead98391a6ab6ffb913a87e48f07755d3190361400e99ffb8b7a8f48"
-  end
-
-  depends_on "z80oolong/debian-noroot/proot-talloc@2.1.11"
+  depends_on "z80oolong/debian-noroot/proot-talloc@2.1.14"
 
   private
 
@@ -35,7 +30,7 @@ class ProotAT06 < Formula
   public
 
   def install
-    f_talloc = Formula["z80oolong/debian-noroot/proot-talloc@2.1.11"]
+    f_talloc = Formula["z80oolong/debian-noroot/proot-talloc@2.1.14"]
 
     cd "src" do
       ENV.append "LC_ALL", "C"
